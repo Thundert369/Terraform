@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    parameters {
+        string(name: 'NAME', defaultValue: 'default_value', description: 'Description of the permater')
+        choice(name: 'CHOICE_NAME', choices: ['option 1' 'option 2' ], description: 'choose an option']
+               }
     stages {
         stage('User Request') {
             steps {
