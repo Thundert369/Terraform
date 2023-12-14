@@ -10,7 +10,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from your version control system
-                git 'https://github.com/your/repository.git'
+                 git credentialsId: '' 
+                url:'https://github.com/your-terraform-repo.git'
+                branch: '${BRANCH_NAME}'
             }
         }
         
