@@ -10,9 +10,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from your version control system
-                 git credentialsId: '' 
+                 git credentialsId: 'gitcredentials' 
                 url:'https://github.com/your-terraform-repo.git'
-                branch: '${BRANCH_NAME}'
+                branch: 'main'
             }
         }
         
@@ -27,7 +27,6 @@ pipeline {
                     """
                     
                     // Run the Python script
-                    sh pythonScriptCommand
                 }
             }
         }
