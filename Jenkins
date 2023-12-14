@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+    
+    parameters {
+        string(name: 'param1', description: 'First parameter for the Python script')
+        string(name: 'param2', description: 'Second parameter for the Python script')
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from your version control system
+                git 'https://github.com/your/repository.git'
+            }
+        }
+        
+        stage('Run Python Script') {
+            steps {
+                script {
+                    // Define the command to run the Python script with parameters
+                    def pythonScriptCommand = """
+                        python your_script.py
+                            --param1 "${params.param1}"
+                            --param2 "${params.param2}"
+                    """
+                    
+                    // Run the Python script
+                    sh pythonScriptCommand
+                }
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
