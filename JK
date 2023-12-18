@@ -1,0 +1,48 @@
+//library 'jobconfigflo'
+
+properties([
+  parameters([
+    string(name: 'Connection_Name', defaultValue: '', description: 'Enter the name for connection that need to be created'),
+    choice(name: 'Connection_Type', choices: ['FlatFile','Snowflake', 'Synapse'], description: 'Please select type of connection',defaultValue: 'FlatFile'),
+    choice(name: 'Runtime_Environment', choices: ['Azure 2.0', 'Datalake', 'EU_DATAWAREHOUSE', 'NA_DataLake', 'Non-HDI related tasks'], description: 'Selection of Runtime Environment'),
+    string(name: 'Directory_Path', defaultValue: '', description: 'Enter Directory path for flatfile conn creation'),
+    choice(name: 'Date_Format', choices: ['MM-dd-yyyy', 'MM/dd/yyyy', 'dd/MM/yyyy'], description: 'Select Date Format', defaultValue: '' ),
+    choice(name: 'Code_Page', choices: ['UTF-8', 'UTF-16', 'MS Windows Latin 1'], description: 'Please select Code Page', defaultValue: '')
+  ])
+])
+
+pipeline {
+  agent any
+ 
+  stages{
+    // Stage to init -clean work space and JIRA approval check 
+    stage('Initiation ') {
+      steps {
+        // Validates the mandatory parameters required for appscan ,  Code to cancel appscan jobs if cleanup fails 
+        //echo "$slave_label"
+        echo 'Pre build validation and clean up workspace '
+        deleteDir()
+        echo " Chosen Parameters by user :"
+        echo "Connection Name : $Connection_Name"
+        echo "Connection Type :$Connection_Type"
+        echo "Runtime Environment :$Runtime_Environment"
+        echo "Directory Path : $Directory_Path"
+        echo "DateFormat : $Date_Format"
+        echo "CodePage : $Code_Page"
+      }
+    }
+    stage ('FlatFile Creation ') {
+      steps {
+        script {
+          echo "Starting flat file creation "
+        }
+      }
+    }
+  }
+  options {
+    timeout(time: 300, unit: 'MINUTES')   // timeout on whole pipeline job
+    buildDiscarder(logRotator(numToKeepStr: '50'))
+  }
+
+}
+
