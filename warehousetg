@@ -1,0 +1,51 @@
+# Snowflake connection parameters
+account = 'gj35654.central-india.azure'
+warehouse = 'COMPUTE_WH'
+database = 'SNOWFLAKE'
+schema = 'ALERT'
+user = 'HRIDYA'
+password = 'Aurita@123'
+
+# Warehouse details
+warehouse_name = 'Praise'
+warehouse_size = 'X-small'
+
+# Tagging details
+application_name = 'GDP'
+cost_center = 'GDP_AUTOMATION'
+application_owner = 'Hridya VM'
+tech_lead = 'Praise'
+distribution_list = 'hridya.praise@gmail.com'
+
+# Create a Snowflake connection
+conn = snowflake.connector.connect(
+    user=user,
+    password=password,
+    account=account,
+    warehouse=warehouse,
+    database=database,
+    schema=schema
+)
+
+# Create warehouse if not exists
+try:
+    with conn.cursor() as cursor:
+        cursor.execute(f"CREATE WAREHOUSE IF NOT EXISTS {warehouse_name} WITH WAREHOUSE_SIZE = '{warehouse_size}'")
+        print(f"Warehouse '{warehouse_name}' created successfully.")
+except snowflake.connector.errors.ProgrammingError as e:
+    print(f"Error creating warehouse: {e.msg}")
+
+# Apply tagging to the warehouse
+try:
+    with conn.cursor() as cursor:
+        cursor.execute(f"ALTER WAREHOUSE {warehouse_name} SET TAG common.PUBLIC.application_name = '{application_name}'")
+        cursor.execute(f"ALTER WAREHOUSE {warehouse_name} SET TAG common.PUBLIC.cost_center = '{cost_center}'")
+        cursor.execute(f"ALTER WAREHOUSE {warehouse_name} SET TAG common.PUBLIC.application_owner = '{application_owner}'")
+        cursor.execute(f"ALTER WAREHOUSE {warehouse_name} SET TAG common.PUBLIC.tech_lead = '{tech_lead}'")
+        cursor.execute(f"ALTER WAREHOUSE {warehouse_name} SET TAG common.PUBLIC.distribution_list = '{distribution_list}'")
+        print("Tags applied successfully.")
+except snowflake.connector.errors.ProgrammingError as e:
+    print(f"Error applying tags to the warehouse: {e.msg}")
+
+# Close the connection
+conn.close()
