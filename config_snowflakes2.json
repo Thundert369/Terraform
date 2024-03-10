@@ -1,0 +1,53 @@
+{
+  "approver_map": [
+    {
+      "map_details": "Applicaiton Name & Respective Approvers",
+      "approver_category": "123",
+      "approver_ids": "abc",
+      "approver_emails": "xyz.vijayamohan@chubb.com"
+    },
+    {
+      "map_details": "Applicaiton Name & Respective Approvers",
+      "approver_category": "456",
+      "approver_ids": "def",
+      "approver_emails": "xyz.vijayamohan@chubb.com"
+    },
+    {
+      "map_details": "Applicaiton Name & Respective Approvers",
+      "approver_category": "123",
+      "approver_ids": "ghi",
+      "approver_emails": "xyz.vijayamohan@chubb.com"
+    },
+    {
+      "map_details": "Applicaiton Name & Respective Approvers",
+      "approver_category": "456",
+      "approver_ids": "jkl",
+      "approver_emails": "xyz.vijayamohan@chubb.com"
+    },
+    {
+      "map_details": "Applicaiton Name & Respective Approvers",
+      "approver_category": "B360",
+      "approver_ids": "xyz",
+      "approver_emails": "hridyapraise.vijayamohan@chubb.com"
+    },
+    {
+      "map_details": "Applicaiton Name & Respective Approvers",
+      "approver_category": "B360",
+      "approver_ids": "hp",
+      "approver_emails": "hridyapraise.vijayamohan@chubb.com"
+    },
+    {
+      "map_details": "Applicaiton Name & Respective Approvers",
+      "approver_category": "B360",
+      "approver_ids": "hpvm",
+      "approver_emails": "hridyapraise.vijayamohan@chubb.com"
+    },
+    {
+      "map_details": "Applicaiton Name & Respective Approvers",
+      "approver_category": "B360",
+      "approver_ids": "vm",
+      "approver_emails": "hridyapraise.vijayamohan@chubb.com"
+    }
+  ]
+}
+{"approver_map":{"map_details":"application","approver_category":"B360","approver_ids":"HRVIJAY","approver_emails":"hridyapraise.vijayamohan@chubb.com"}}
