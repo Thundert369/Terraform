@@ -1,0 +1,33 @@
+
+import os
+
+def find_drop_statements(sql_file):
+    with open(sql_file, 'r') as file:
+        sql_content = file.read()
+        if 'DROP' in sql_content.upper():
+            return True
+        else:
+            return False
+
+def main():
+    sql_files_list_path = 'sql_files.txt'  # Path to the text file containing SQL file names
+    sql_files_folder = 'sql_files_folder'  # Path to the folder containing SQL files
+
+    # Read SQL file names from the text file
+    with open(sql_files_list_path, 'r') as file:
+        sql_files = [line.strip() for line in file.readlines()]
+
+    # Iterate through SQL files and check for DROP statements
+    for sql_file in sql_files:
+        file_path = os.path.join(sql_files_folder, sql_file)
+        if os.path.exists(file_path):
+            has_drop = find_drop_statements(file_path)
+            if has_drop:
+                print(f"{sql_file} contains DROP statements.")
+            else:
+                print(f"{sql_file} does not contain any DROP statements.")
+        else:
+            print(f"File '{sql_file}' not found.")
+
+if __name__ == "__main__":
+    main()
