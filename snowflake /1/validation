@@ -1,5 +1,5 @@
-
 import os
+import sys
 
 def find_drop_statements(sql_file):
     with open(sql_file, 'r') as file:
@@ -9,10 +9,7 @@ def find_drop_statements(sql_file):
         else:
             return False
 
-def main():
-    sql_files_list_path = 'sql_files.txt'  # Path to the text file containing SQL file names
-    sql_files_folder = 'sql_files_folder'  # Path to the folder containing SQL files
-
+def main(sql_files_list_path, sql_files_folder):
     # Read SQL file names from the text file
     with open(sql_files_list_path, 'r') as file:
         sql_files = [line.strip() for line in file.readlines()]
@@ -30,4 +27,10 @@ def main():
             print(f"File '{sql_file}' not found.")
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <sql_files_list_path> <sql_files_folder>")
+        sys.exit(1)
+
+    sql_files_list_path = sys.argv[1]
+    sql_files_folder = sys.argv[2]
+    main(sql_files_list_path, sql_files_folder)
